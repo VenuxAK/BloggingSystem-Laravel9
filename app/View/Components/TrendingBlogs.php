@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Blog;
 use Illuminate\View\Component;
 
 class TrendingBlogs extends Component
@@ -23,6 +24,8 @@ class TrendingBlogs extends Component
      */
     public function render()
     {
-        return view('components.trending-blogs');
+        return view('components.trending-blogs', [
+            "trendingBlogs" => Blog::inRandomOrder()->take(6)->get()
+        ]);
     }
 }

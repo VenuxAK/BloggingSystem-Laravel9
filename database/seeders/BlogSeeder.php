@@ -17,18 +17,25 @@ class BlogSeeder extends Seeder
      */
     public function run()
     {
+        Blog::truncate();
         $c = Category::all()->pluck('id');
         $u = User::all()->pluck('id');
 
+        foreach($c as $i) {
+            Blog::factory(3 * $i)->create([
+                "category_id" => $i,
+                "user_id" => $c[0]
+            ]);
+        }
         // Run First
-        Blog::factory(13)->create([
-            "category_id" => $c[0],
-            "user_id" => $c[0]
-        ]);
-        Blog::factory(2)->create([
-            "category_id" => $c[4],
-            "user_id" => $u[0]
-        ]);
+        // Blog::factory(13)->create([
+        //     "category_id" => $c[0],
+        //     "user_id" => $c[0]
+        // ]);
+        // Blog::factory(2)->create([
+        //     "category_id" => $c[1],
+        //     "user_id" => $u[0]
+        // ]);
 
         // Run Second
         // Blog::factory(15)->create([

@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\View\Component;
 
 class News extends Component
@@ -23,6 +25,9 @@ class News extends Component
      */
     public function render()
     {
-        return view('components.news');
+        $category = Category::where('name', 'News')->first();
+        return view('components.news', [
+            "news" => $category->blogs
+        ]);
     }
 }
