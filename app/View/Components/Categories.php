@@ -2,10 +2,10 @@
 
 namespace App\View\Components;
 
-use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\View\Component;
 
-class LatestBlogs extends Component
+class Categories extends Component
 {
     /**
      * Create a new component instance.
@@ -24,8 +24,8 @@ class LatestBlogs extends Component
      */
     public function render()
     {
-        return view('components.latest-blogs', [
-            "latestBlogs" => Blog::latest()->limit(4)->get()
+        return view('components.categories', [
+            "categories" => Category::latest()->get()
         ]);
     }
 }

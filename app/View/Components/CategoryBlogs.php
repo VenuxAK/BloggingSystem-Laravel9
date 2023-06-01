@@ -2,9 +2,10 @@
 
 namespace App\View\Components;
 
+use App\Models\Blog;
 use Illuminate\View\Component;
 
-class BlogTags extends Component
+class CategoryBlogs extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +24,8 @@ class BlogTags extends Component
      */
     public function render()
     {
-        return view('components.blog-tags');
+        return view('components.category-blogs', [
+            "blogs" => Blog::latest()->filter(request(['category']))->paginate(6)->withQueryString()
+        ]);
     }
 }

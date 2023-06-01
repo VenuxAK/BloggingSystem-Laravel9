@@ -16,14 +16,19 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categories <span
-                                class="sr-only">(current)</span></a>
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        <?php
+                        use app\Models\Category;
+                        $categories = Category::latest()->get();
+                        ?>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="/login">Tech</a>
-                            <a class="dropdown-item" href="/register">Travel</a>
-                            <a class="dropdown-item" href="/profile">News</a>
-                            <a class="dropdown-item" href="/profile">Nature</a>
-                            <a class="dropdown-item" href="/profile">Science</a>
+                            @foreach ($categories as $category)
+                                <a class="dropdown-item" href="/?category={{ $category->slug }}"> {{ $category->name }}
+                                </a>
+                            @endforeach
                         </div>
                     </li>
                     {{-- <li class="nav-item dropdown">

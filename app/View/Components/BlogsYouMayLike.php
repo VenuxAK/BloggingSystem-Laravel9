@@ -23,6 +23,8 @@ class BlogsYouMayLike extends Component
      */
     public function render()
     {
-        return view('components.blogs-you-may-like');
+        return view('components.blogs-you-may-like', [
+            "blogYouMayLike"
+        ]);
     }
 }

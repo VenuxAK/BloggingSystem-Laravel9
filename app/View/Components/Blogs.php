@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Blog;
 use Illuminate\View\Component;
 
 class Blogs extends Component
@@ -23,6 +24,8 @@ class Blogs extends Component
      */
     public function render()
     {
-        return view('components.blogs');
+        return view('components.blogs', [
+            "blogs" => Blog::latest()->filter(request(['category']))->paginate(4)->withQueryString()
+        ]);
     }
 }

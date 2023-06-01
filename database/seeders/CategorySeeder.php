@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        Category::truncate();
         Category::factory()->create([
             "name" => "Tech",
             "slug" => "tech"
@@ -38,6 +39,26 @@ class CategorySeeder extends Seeder
         Category::factory()->create([
             "name" => "Science",
             "slug" => "science"
+        ]);
+        Category::factory()->create([
+            "name" => "Business",
+            "slug" => "business"
+        ]);
+        Category::factory()->create([
+            "name" => "Photography",
+            "slug" => "photography"
+        ]);
+        Category::factory()->create([
+            "name" => "Lifestyle",
+            "slug" => "lifestyle"
+        ]);
+        Category::factory()->create([
+            "name" => "Education",
+            "slug" => "education"
+        ]);
+        Category::factory()->create([
+            "name" => "Social",
+            "slug" => "social"
         ]);
     }
 }
