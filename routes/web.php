@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,9 @@ Route::get('/blogs', function () {
     return view('blogs');
 });
 Route::get('/blogs/{blog:slug}', [BlogController::class, "show"]);
+
+Route::get('/login', [AuthController::class, "login"])->middleware('guest');
+Route::post('/login', [AuthController::class, "postLogin"])->middleware('guest');
+Route::get('/register', [AuthController::class, "register"])->middleware('guest');
+Route::post('/register', [AuthController::class, "store"])->middleware('guest');
+Route::post('/logout', [AuthController::class, "logout"])->middleware('auth');

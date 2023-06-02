@@ -27,31 +27,20 @@
 </head>
 
 <body>
-    {{-- <div class="container-fluid fh5co_header_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i
-                            class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
-                    <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#"
-                            class="treding_btn">Trending</a>
-                        <div class="fh5co_treding_position_absolute"></div>
-                    </div>
-                    <a href="#" class="color_fff fh5co_mediya_setting">Instagram’s big redesign goes live with
-                        black-and-white app</a>
-                </div>
-            </div>
+    @if (!Request::is('login') && !Request::is('register'))
+        <x-top-header />
+        <x-navbar />
+        <div class="main-section">
+            {{ $slot }}
         </div>
-    </div> --}}
-    <x-top-header />
-    <x-navbar />
-    <div class="main-section">
-        {{ $slot }}
-    </div>
-    <x-footer />
+        <x-footer />
 
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
-    </div>
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+        </div>
+    @else
+        {{ $slot }}
+    @endif
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/assets/js/owl.carousel.min.js"></script>
