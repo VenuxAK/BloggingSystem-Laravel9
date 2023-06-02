@@ -10,21 +10,27 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputTitle">Title</label>
-                            <input type="text" name="title" class="form-control" id="inputTitle"
-                                placeholder="Title">
+                            <input type="text" name="title" value="{{ old('title') }}" class="form-control"
+                                id="inputTitle" placeholder="Title">
+                            <x-error name="title" />
                         </div>
                         <div class="form-group">
                             <label for="exampleSelectGender">Categories</label>
-                            <select class="form-control" name="category_id" id="exampleSelectGender">
-                                <option>Select category</option>
+                            <select class="form-control" value="{{ old('category_id') }}" name="category_id"
+                                id="exampleSelectGender">
+                                <option value="">Select category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }} </option>
                                 @endforeach
                             </select>
+                            <x-error name="category_id" />
                         </div>
                         <div class="form-group">
                             <label>Thumbnail</label>
-                            <input type="file" name="thumbnail" class="file-upload-default">
+                            <input type="file" value="{{ old('thumbnail') }}" name="thumbnail"
+                                class="file-upload-default">
                             <div class="input-group col-xs-12">
                                 <input type="text" class="form-control file-upload-info" disabled
                                     placeholder="Upload Image">
@@ -33,10 +39,12 @@
                                         type="button">Upload</button>
                                 </span>
                             </div>
+                            <x-error name="thumbnail" />
                         </div>
                         <div class="form-group">
                             <label for="inputBody">Body</label>
-                            <textarea class="form-control editor" name="body" id="inputBody"></textarea>
+                            <textarea class="form-control editor" name="body" id="inputBody">{{ old('body') }}</textarea>
+                            <x-error name="body" />
                         </div>
                         <button type="submit" class="btn btn-gradient-primary mr-2">Create</button>
                         <a href="/admin/blogs" class="btn btn-light">Back</a>

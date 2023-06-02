@@ -1,6 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="/admin/dashboard"><img src="/assets/admin/images/logo.svg" alt="logo" /></a>
+        <a class="navbar-brand brand-logo" href="/admin/dashboard"><img src="/assets/admin/images/logo.svg"
+                alt="logo" /></a>
         <a class="navbar-brand brand-logo-mini" href="/admin/dashboard"><img src="/assets/admin/images/logo-mini.svg"
                 alt="logo" /></a>
     </div>
@@ -24,7 +25,7 @@
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
-                        <p class="mb-1 text-black">David Greymaax</p>
+                        <p class="mb-1 text-black"> {{ auth()->user()->name }} </p>
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -37,7 +38,7 @@
                         Profile
                     </a>
                     <div class="dropdown-divider"></div>
-                    <form action="" method="POST">
+                    <form action="/logout" method="POST">
                         @csrf
                         <button class="border-0 bg-white dropdown-item" type="submit"
                             onclick="return confirm('Are you sure want to logout?')">
@@ -108,7 +109,7 @@
                 </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-                <form action="" method="POST">
+                <form action="/logout" method="POST">
                     @csrf
                     <button class="border-0 bg-white nav-link" type="submit"
                         onclick="return confirm('Are you sure want to logout?')">

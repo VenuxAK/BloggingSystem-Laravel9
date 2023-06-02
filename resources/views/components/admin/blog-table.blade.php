@@ -15,7 +15,8 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Body</th>
+                            <th>Category</th>
+                            <th>Author</th>
                             <th>Image</th>
                             <th>Created Date</th>
                             <th>Action</th>
@@ -27,32 +28,48 @@
                                 <td>
                                     {{ $blog->id }}</td>
                                 <td>
-                                    {{-- <a href="/admin/blogs/{{ $blog->slug }}"> --}}
-                                    <a href="#">
-                                        {{ substr($blog->title, 0, 25) . '...' }}
-                                    </a>
+                                    {{ strlen($blog->title) > 25 ? substr($blog->title, 0, 25) . '...' : $blog->title }}
                                 </td>
                                 <td>
-                                    {!! substr($blog->body, 0, 30) . '...' !!}
+                                    {{ $blog->category->name }}
                                 </td>
-                                <td> NULL </td>
+                                <td>
+                                    {{ $blog->author->name }}
+                                </td>
+                                <td>
+                                    @if ($blog->image)
+                                        <img src="/storage/{{ $blog->image }}" style="object-fit:cover" width="150"
+                                            alt="">
+                                    @else
+                                        NULL
+                                    @endif
+                                </td>
                                 <td>
                                     {{ $blog->created_at->diffForHumans() }}
                                 </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="/admin/blogs/{{ $blog->slug }}/edit"
-                                            class="btn btn-sm btn-warning m-1">Edit</a>
-                                        <form action="/admin/blogs/{{ $blog->slug }}/delete" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger m-1"
-                                                onclick="return confirm('Are you sure want to delete')">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                @if (Request::is('admin/blogs'))
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="/admin/blogs/{{ $blog->slug }}"
+                                                class="btn btn-sm btn-info m-1">View</a>
+                                            <a href="/admin/blogs/{{ $blog->slug }}/edit"
+                                                class="btn btn-sm btn-warning m-1">Edit</a>
+                                            <form action="/admin/blogs/{{ $blog->slug }}/delete" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger m-1"
+                                                    onclick="return confirm('Are you sure want to delete')">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @else
+                                    <td>
+                                        <a href="/admin/blogs/{{ $blog->slug }}"
+                                            class="btn btn-sm btn-info m-1">View</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

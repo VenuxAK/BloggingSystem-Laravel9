@@ -11,17 +11,22 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="inputTitle">Title</label>
-                            <input type="text" name="title" class="form-control" id="inputTitle"
-                                placeholder="Title">
+                            <input type="text" name="title" value="{{ old('title', $blog->title) }}"
+                                class="form-control" id="inputTitle" placeholder="Title">
+                            <x-error name="title" />
                         </div>
                         <div class="form-group">
                             <label for="exampleSelectGender">Categories</label>
                             <select class="form-control" name="category_id" id="exampleSelectGender">
-                                <option>Select category</option>
+                                <option value="">Select category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                    <option value="{{ $category->id }}"
+                                        {{ $category->id == old('category_id', $blog->category_id) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            <x-error name="category_id" />
                         </div>
                         <div class="form-group">
                             <label>Thumbnail</label>
@@ -34,12 +39,17 @@
                                         type="button">Upload</button>
                                 </span>
                             </div>
+                            <div class="mt-1 mb-3">
+                                <img src="/storage/{{ $blog->image }}" width="200" alt="">
+                            </div>
+                            <x-error name="thumbnail" />
                         </div>
                         <div class="form-group">
                             <label for="inputBody">Body</label>
-                            <textarea class="form-control editor" name="body" id="inputBody"></textarea>
+                            <textarea class="form-control editor" name="body" id="inputBody">{!! $blog->body !!}</textarea>
+                            <x-error name="body" />
                         </div>
-                        <button type="submit" class="btn btn-gradient-primary mr-2">Create</button>
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
                         <a href="/admin/blogs" class="btn btn-light">Back</a>
                     </form>
                 </div>
