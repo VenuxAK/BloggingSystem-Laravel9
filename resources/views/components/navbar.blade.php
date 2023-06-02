@@ -15,37 +15,23 @@
                         <a class="nav-link" href="/blogs">Blogs <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
-                            <span class="sr-only">(current)</span>
-                        </a>
-                        <?php
-                        use app\Models\Category;
-                        $categories = Category::latest()->get();
-                        ?>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            @foreach ($categories as $category)
-                                <a class="dropdown-item" href="/?category={{ $category->slug }}"> {{ $category->name }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </li>
-                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account <span
                                 class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="/login">Login</a>
-                            <a class="dropdown-item" href="/register">Register</a>
-                            <a class="dropdown-item" href="/profile">Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <form action="" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
+                            @auth
+                                <a class="dropdown-item" href="/profile">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            @else
+                                <a class="dropdown-item" href="/login">Login</a>
+                                <a class="dropdown-item" href="/register">Register</a>
+                            @endauth
                         </div>
-                    </li> --}}
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="#">About us <span class="sr-only">(current)</span></a>
                     </li>
