@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +23,31 @@ Route::get('/blogs', function () {
 });
 Route::get('/blogs/{blog:slug}', [BlogController::class, "show"]);
 
-Route::get('/login', [AuthController::class, "login"])->middleware('guest');
-Route::post('/login', [AuthController::class, "postLogin"])->middleware('guest');
-Route::get('/register', [AuthController::class, "register"])->middleware('guest');
-Route::post('/register', [AuthController::class, "store"])->middleware('guest');
-Route::post('/logout', [AuthController::class, "logout"])->middleware('auth');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', "login")->middleware('guest');
+    Route::post('/login', "postLogin")->middleware('guest');
+    Route::get('/register', "register")->middleware('guest');
+    Route::post('/register', "store")->middleware('guest');
+    Route::post('/logout', "logout")->middleware('auth');
+});
+
+Route::get('/admin', function () {
+    return redirect('/admin/dashboard');
+});
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('dashboard', [AdminBlogController::class, "dashboard"]);
+
+    Route::get('blogs', [AdminBlogController::class, "blogs"]);
+    Route::get('blogs/create', [AdminBlogController::class, "createBlog"]);
+    Route::post('blogs/store', [AdminBlogController::class, "storeBlog"]);
+    Route::get('blogs/{blog:slug}/edit', [AdminBlogController::class, "editBlog"]);
+    Route::put('blogs/{blog:slug}/update', [AdminBlogController::class, "updateBlog"]);
+    Route::delete('blogs/{blog:slug}/delete', [AdminBlogController::class, "deleteBlog"]);
+
+    Route::get('users', [AdminUserController::class, "users"]);
+    Route::get('users/create', [AdminUserController::class, "create"]);
+    Route::post('users/store', [AdminUserController::class, "store"]);
+    Route::get('users/{user:username}/edit', [AdminUserController::class, "edit"]);
+    Route::put('users/{user:username}/update', [AdminUserController::class, "update"]);
+    Route::delete('users/{user:username}/delete', [AdminUserController::class, "destroy"]);
+});
