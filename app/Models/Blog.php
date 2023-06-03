@@ -20,6 +20,11 @@ class Blog extends Model
         });
     }
 
+    // public function getBodyAttribute($value)
+    // {
+    //     // return substr($value, 0, 100);
+    // }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
