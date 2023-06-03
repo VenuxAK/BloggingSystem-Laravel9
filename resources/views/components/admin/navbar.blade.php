@@ -21,7 +21,11 @@
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
                     aria-expanded="false">
                     <div class="nav-profile-img">
-                        <img src="/assets/admin/images/faces/face1.jpg" alt="image">
+                        @if (auth()->user()->avatar)
+                            <img src="/storage/{{ auth()->user()->avatar }}" alt="image">
+                        @else
+                            <img src="/assets/admin/images/faces/face1.jpg" alt="image">
+                        @endif
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">

@@ -38,6 +38,11 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="#">Contact <span class="sr-only">(current)</span></a>
                     </li>
+                    @can('admin')
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/admin/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </nav>

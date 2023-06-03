@@ -4,11 +4,13 @@
             <div class="card-body">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h4 class="card-title">Users Table</h4>
-                    @if (Request::is('admin/users'))
-                        <p class="card-description">
-                            <a href="/admin/users/create" class="btn btn-outline-primary">Create new user</a>
-                        </p>
-                    @endif
+                    @can('superAdmin')
+                        @if (Request::is('admin/users'))
+                            <p class="card-description">
+                                <a href="/admin/users/create" class="btn btn-outline-primary">Create new user</a>
+                            </p>
+                        @endif
+                    @endcan
                 </div>
                 <table class="table table-hover">
                     <thead>
@@ -20,9 +22,11 @@
                             <th>Role</th>
                             <th>Gender</th>
                             <th>Created Date</th>
-                            @if (Request::is('admin/users'))
-                                <th>Actions</th>
-                            @endif
+                            @can('superAdmin')
+                                @if (Request::is('admin/users'))
+                                    <th>Actions</th>
+                                @endif
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -43,20 +47,22 @@
                                 <td> {{ $user->created_at->format('M j Y') }} </td>
                                 <td>
                                     <div class="d-flex">
-                                        @if (Request::is('admin/users'))
-                                            <a href="/admin/users/{{ $user->username }}/edit"
-                                                class="btn btn-sm btn-warning m-1">
-                                                Edit
-                                            </a>
-                                            <form action="/admin/users/{{ $user->username }}/delete" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger m-1"
-                                                    onclick="return confirm('Are you sure want to delete user')">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        @endif
+                                        @can('superAdmin')
+                                            @if (Request::is('admin/users'))
+                                                <a href="/admin/users/{{ $user->username }}/edit"
+                                                    class="btn btn-sm btn-warning m-1">
+                                                    Edit
+                                                </a>
+                                                <form action="/admin/users/{{ $user->username }}/delete" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger m-1"
+                                                        onclick="return confirm('Are you sure want to delete user')">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

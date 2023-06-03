@@ -24,7 +24,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::get('/admin', function () {
     return redirect('/admin/dashboard');
 });
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware('can:admin')->prefix('admin')->group(function () {
     Route::get('dashboard', [AdminBlogController::class, "dashboard"]);
 
     Route::get('blogs', [AdminBlogController::class, "blogs"]);
@@ -36,9 +36,11 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::delete('blogs/{blog:slug}/delete', [AdminBlogController::class, "deleteBlog"]);
 
     Route::get('users', [AdminUserController::class, "users"]);
-    Route::get('users/create', [AdminUserController::class, "create"]);
-    Route::post('users/store', [AdminUserController::class, "store"]);
-    Route::get('users/{user:username}/edit', [AdminUserController::class, "edit"]);
-    Route::patch('users/{user:username}/update', [AdminUserController::class, "update"]);
-    Route::delete('users/{user:username}/delete', [AdminUserController::class, "destroy"]);
+    Route::middleware('can:superAdmin')->group(function () {
+        Route::get('users/create', [AdminUserController::class, "create"]);
+        Route::post('users/store', [AdminUserController::class, "store"]);
+        Route::get('users/{user:username}/edit', [AdminUserController::class, "edit"]);
+        Route::patch('users/{user:username}/update', [AdminUserController::class, "update"]);
+        Route::delete('users/{user:username}/delete', [AdminUserController::class, "destroy"]);
+    });
 });

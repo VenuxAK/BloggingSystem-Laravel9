@@ -44,6 +44,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->back()->with('message', 'See you soon');
+        return redirect('/')->with('message', 'See you soon');
     }
 }
