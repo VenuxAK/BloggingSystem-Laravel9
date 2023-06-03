@@ -39,6 +39,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('users/create', [AdminUserController::class, "create"]);
     Route::post('users/store', [AdminUserController::class, "store"]);
     Route::get('users/{user:username}/edit', [AdminUserController::class, "edit"]);
-    Route::put('users/{user:username}/update', [AdminUserController::class, "update"]);
+    Route::patch('users/{user:username}/update', [AdminUserController::class, "update"]);
     Route::delete('users/{user:username}/delete', [AdminUserController::class, "destroy"]);
 });
