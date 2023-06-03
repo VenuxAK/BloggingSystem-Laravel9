@@ -11,6 +11,12 @@ use Illuminate\Validation\Rule;
 
 class AdminBlogController extends Controller
 {
+    // public function __construct()
+    // {
+    //     if (auth()->user() && auth()->user()->role == "user") {
+    //         return redirect('/');
+    //     }
+    // }
     public function dashboard()
     {
         return view('admin.dashboard', [
