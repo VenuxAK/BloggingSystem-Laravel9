@@ -7,7 +7,13 @@
         @foreach ($blogs as $blog)
             <div class="col-md-6 mb-4">
                 <div class="fh5co_hover_news_img">
-                    <div class="fh5co_news_img"><img src="/assets/images/nathan-mcbride-229637.jpg" alt="" /></div>
+                    <div class="fh5co_news_img">
+                        @if ($blog->image)
+                            <img src="/storage/{{ $blog->image }}" alt="" />
+                        @else
+                            <img src="/assets/images/nathan-mcbride-229637.jpg" alt="" />
+                        @endif
+                    </div>
                     <div class="animate-box">
                         <p class="p-0 m-0">
                             <a href="/blogs/{{ $blog->slug }}" class="fh5co_magna"> {{ $blog->title }} </a>

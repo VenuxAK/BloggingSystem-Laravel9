@@ -22,7 +22,7 @@
                 </p>
                 <p class="fh5co_mini_time"> {{ $blog->author->name }} -
                     {{ $blog->created_at->format('M j, Y') }} </p>
-                <div class="fh5co_consectetur"> {!! $blog->body !!} </div>
+                <div class="fh5co_consectetur"> {!! str()->limit(strip_tags($blog->body), 150) !!} </div>
             </div>
         </div>
     @endforeach
