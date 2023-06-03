@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Mews\Purifier\Facades\Purifier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,11 @@ class Blog extends Model
             });
         });
     }
+
+    // public function getBodyAttribute($html)
+    // {
+    //     return str()->limit(strip_tags($html), 150);
+    // }
 
     public function category()
     {

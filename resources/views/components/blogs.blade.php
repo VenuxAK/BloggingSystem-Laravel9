@@ -6,7 +6,13 @@
         <div class="row pb-4">
             <div class="col-md-5">
                 <div class="fh5co_hover_news_img">
-                    <div class="fh5co_news_img"><img src="/assets/images/nathan-mcbride-229637.jpg" alt="" /></div>
+                    <div class="fh5co_news_img">
+                        @if ($blog->image)
+                            <img src="/storage/{{ $blog->image }}" alt="" />
+                        @else
+                            <img src="/assets/images/nathan-mcbride-229637.jpg" alt="" />
+                        @endif
+                    </div>
                     <div></div>
                 </div>
             </div>
@@ -16,7 +22,7 @@
                 </p>
                 <p class="fh5co_mini_time"> {{ $blog->author->name }} -
                     {{ $blog->created_at->format('M j, Y') }} </p>
-                <div class="fh5co_consectetur"> {!! $blog->body !!} </div>
+                <div class="fh5co_consectetur"> {!! str()->limit(strip_tags($blog->body), 150) !!} </div>
             </div>
         </div>
     @endforeach

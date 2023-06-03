@@ -9,7 +9,11 @@
                         <p> {{ $blog->author->name }} - {{ $blog->created_at->format('M j, Y') }} </p>
                         <p> {{ $blog->category->name }} </p>
                     </div>
-                    <img src="/assets/images/camila-cordeiro-114636.jpg" class="img-fluid" alt="">
+                    @if ($blog->image)
+                        <img src="/storage/{{ $blog->image }}" class="img-fluid" alt="">
+                    @else
+                        <img src="/assets/images/camila-cordeiro-114636.jpg" class="img-fluid" alt="">
+                    @endif
                     <div class="body my-3 text-muted"> {!! $blog->body !!} </div>
                     <x-comments-wrapper />
                 </div>
