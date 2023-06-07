@@ -12,6 +12,7 @@ Route::get('/blogs', function () {
     return view('blogs');
 });
 Route::get('/blogs/{blog:slug}', [BlogController::class, "show"]);
+Route::post('/blogs/{blog:slug}/comment', [BlogController::class, "storeComment"])->middleware('auth');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', "login")->middleware('guest')->name('login');

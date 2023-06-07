@@ -15,7 +15,7 @@
                         <img src="/assets/images/camila-cordeiro-114636.jpg" class="img-fluid" alt="">
                     @endif
                     <div class="body my-3 text-muted"> {!! $blog->body !!} </div>
-                    <x-comments-wrapper />
+                    <x-comments-wrapper :blog="$blog" />
                 </div>
                 <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
                     <x-categories />
